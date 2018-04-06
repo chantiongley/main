@@ -2,7 +2,6 @@ package seedu.address.model.book;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
-import static sun.management.snmp.jvminstr.JvmThreadInstanceEntryImpl.ThreadStateMap.Byte1.other;
 
 /**
  * Represents a Book's availability in the catalogue.
@@ -19,7 +18,7 @@ public class Avail {
         + "3. " + RESERVED + "\n"
         + "4. " + BORROWED_AND_RESERVED + "\n";
 
-    public String value;
+    private String value;
 
     /**
      * Constructs an {@code Avail}.
@@ -32,10 +31,6 @@ public class Avail {
         this.value = avail;
     }
 
-    public void changeStatus (String status) {
-        this.value = status;
-    }
-
     /**
      * Returns if a given string is a valid book avail.
      */
@@ -43,6 +38,14 @@ public class Avail {
         return test.equals(AVAILABLE)
             || test.equals(BORROWED)
             || test.equals(RESERVED) || test.equals(BORROWED_AND_RESERVED);
+    }
+
+    public String getValue() {
+        return value;
+    }
+
+    public void changeStatus(String status) {
+        this.value = status;
     }
 
     @Override

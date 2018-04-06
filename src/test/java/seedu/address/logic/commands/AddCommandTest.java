@@ -120,7 +120,9 @@ public class AddCommandTest {
         }
 
         @Override
-        public void reserveBook(Book target) { fail("This method should not be called.");}
+        public void reserveBook(Book target) {
+            fail("This method should not be called.");
+        }
 
         @Override
         public void deleteBook(Book target) {

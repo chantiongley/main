@@ -1,16 +1,5 @@
 package seedu.address.logic.commands;
 
-import org.junit.Test;
-import seedu.address.commons.core.Messages;
-import seedu.address.commons.core.index.Index;
-import seedu.address.logic.CommandHistory;
-import seedu.address.logic.UndoRedoStack;
-import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
-import seedu.address.model.UserPrefs;
-import seedu.address.model.book.Book;
-
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
@@ -21,9 +10,18 @@ import static seedu.address.logic.commands.CommandTestUtil.showBookAtIndex;
 import static seedu.address.testutil.TypicalBooks.getTypicalCatalogue;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIFTH_BOOK;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_BOOK;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FOURTH_BOOK;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_BOOK;
-import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_BOOK;
+
+import org.junit.Test;
+
+import seedu.address.commons.core.Messages;
+import seedu.address.commons.core.index.Index;
+import seedu.address.logic.CommandHistory;
+import seedu.address.logic.UndoRedoStack;
+import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
+import seedu.address.model.UserPrefs;
+import seedu.address.model.book.Book;
 
 public class ReserveCommandTest {
     private Model model = new ModelManager(getTypicalCatalogue(), new UserPrefs());
@@ -36,7 +34,7 @@ public class ReserveCommandTest {
         String expectedMessage = String.format(ReserveCommand.MESSAGE_SUCCESS, bookToReserve);
         ModelManager expectedModel = new ModelManager(model.getCatalogue(), new UserPrefs());
         expectedModel.reserveBook(bookToReserve);
-        assertCommandSuccess (reserveCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(reserveCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
@@ -121,7 +119,7 @@ public class ReserveCommandTest {
         Model expectedModel = new ModelManager(model.getCatalogue(), new UserPrefs());
 
         showBookAtIndex(model, INDEX_SECOND_BOOK);
-        Book bookToReserve  = model.getFilteredBookList().get(INDEX_FIRST_BOOK.getZeroBased());
+        Book bookToReserve = model.getFilteredBookList().get(INDEX_FIRST_BOOK.getZeroBased());
 
         // reserve -> reserves second book in unfiltered book list / first book in filtered book list
         reserveCommand.execute();

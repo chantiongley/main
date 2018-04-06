@@ -46,7 +46,7 @@ public class BookCard extends UiPart<Region> {
         title.setText(book.getTitle().fullTitle);
         author.setText(book.getAuthor().value);
         isbn.setText(book.getIsbn().value);
-        avail.setText(book.getAvail().value);
+        avail.setText(book.getAvail().getValue());
         book.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 
