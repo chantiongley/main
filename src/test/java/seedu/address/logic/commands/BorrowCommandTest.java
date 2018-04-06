@@ -10,7 +10,6 @@ import static seedu.address.logic.commands.CommandTestUtil.prepareUndoCommand;
 import static seedu.address.logic.commands.CommandTestUtil.showBookAtIndex;
 import static seedu.address.testutil.TypicalBooks.getTypicalCatalogue;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_BOOK;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FOURTH_BOOK;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_BOOK;
 
 import org.junit.Test;
