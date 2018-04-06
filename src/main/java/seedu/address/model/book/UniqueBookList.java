@@ -2,7 +2,10 @@ package seedu.address.model.book;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.address.model.book.Avail.*;
+import static seedu.address.model.book.Avail.AVAILABLE;
+import static seedu.address.model.book.Avail.BORROWED;
+import static seedu.address.model.book.Avail.BORROWED_AND_RESERVED;
+import static seedu.address.model.book.Avail.RESERVED;
 
 import java.util.Iterator;
 import java.util.List;
@@ -82,6 +85,12 @@ public class UniqueBookList implements Iterable<Book> {
         return bookFoundAndDeleted;
     }
 
+    /**
+     * Returns a book
+     * @param toReturn
+     * @return
+     * @throws BookNotFoundException
+     */
     public boolean returnBook(Book toReturn) throws BookNotFoundException {
         requireAllNonNull(toReturn);
 
@@ -89,70 +98,82 @@ public class UniqueBookList implements Iterable<Book> {
 
         switch (status) {
 
-            case AVAILABLE:
-                return true;
+        case AVAILABLE:
+            return true;
 
-            case BORROWED:
-                toReturn.getAvail().changeStatus(AVAILABLE);
-                return true;
+        case BORROWED:
+            toReturn.getAvail().changeStatus(AVAILABLE);
+            return true;
 
-            case BORROWED_AND_RESERVED:
-                toReturn.getAvail().changeStatus(AVAILABLE);
-                return true;
+        case BORROWED_AND_RESERVED:
+            toReturn.getAvail().changeStatus(AVAILABLE);
+            return true;
 
-            case RESERVED:
-                toReturn.getAvail().changeStatus(AVAILABLE);
-                return true;
+        case RESERVED:
+            toReturn.getAvail().changeStatus(AVAILABLE);
+            return true;
 
-            default:
-                throw new BookNotFoundException();
+        default:
+            throw new BookNotFoundException();
         }
     }
 
+    /**
+     * Borrows a book
+     * @param toBorrow
+     * @return
+     * @throws BookNotFoundException
+     */
     public boolean borrow(Book toBorrow) throws BookNotFoundException {
         requireNonNull(toBorrow);
         String bookStatus = toBorrow.getAvail().toString();
 
         switch (bookStatus) {
-            case (AVAILABLE):
-                toBorrow.getAvail().changeStatus(BORROWED);
-                return true;
+        case (AVAILABLE):
+            toBorrow.getAvail().changeStatus(BORROWED);
+            return true;
 
-            case (BORROWED):
-                return true;
+        case (BORROWED):
+            return true;
 
-            case (BORROWED_AND_RESERVED):
-                return true;
+        case (BORROWED_AND_RESERVED):
+            return true;
 
-            case (RESERVED):
-                return false;
-            
-            default:
-                throw new BookNotFoundException();
+        case (RESERVED):
+            return false;
+
+        default:
+            throw new BookNotFoundException();
         }
     }
 
+    /**
+     * Reserves a book
+     * @param toReserve
+     * @return
+     * @throws BookNotFoundException
+     */
     public boolean reserve(Book toReserve) throws BookNotFoundException {
         requireNonNull(toReserve);
         String bookStatus = toReserve.getAvail().toString();
 
         switch (bookStatus) {
-            case (AVAILABLE):
-                toReserve.getAvail().changeStatus(RESERVED);
-                return true;
+        case (AVAILABLE):
+            toReserve.getAvail().changeStatus(RESERVED);
+            return true;
 
-            case (BORROWED):
-                toReserve.getAvail().changeStatus(BORROWED_AND_RESERVED);
-                return true;
+        case (BORROWED):
+            toReserve.getAvail().changeStatus(BORROWED_AND_RESERVED);
+            return true;
 
-            case (BORROWED_AND_RESERVED):
-                return true;
+        case (BORROWED_AND_RESERVED):
+            return true;
 
-            case (RESERVED):
-                return true;
+        case (RESERVED):
+            return true;
 
-            default:
-                throw new BookNotFoundException();
+        default:
+            throw new BookNotFoundException();
         }
     }
 

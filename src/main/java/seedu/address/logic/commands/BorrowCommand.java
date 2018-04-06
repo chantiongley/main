@@ -1,17 +1,21 @@
 package seedu.address.logic.commands;
 
-import seedu.address.commons.core.Messages;
-import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.Model;
-import seedu.address.model.book.Book;
-import seedu.address.model.book.exceptions.BookNotFoundException;
+import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 import java.util.Objects;
 
-import static java.util.Objects.requireNonNull;
+import seedu.address.commons.core.Messages;
+import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.Model;
+import seedu.address.model.account.PrivilegeLevel;
+import seedu.address.model.book.Book;
+import seedu.address.model.book.exceptions.BookNotFoundException;
 
+/**
+ * Borrows a book
+ */
 public class BorrowCommand extends UndoableCommand {
 
     public static final String COMMAND_WORD = "borrow";
@@ -19,16 +23,18 @@ public class BorrowCommand extends UndoableCommand {
     public static final String MESSAGE_FAILURE = "Book not available for borrowing!";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Borrows the book identified by the index number used in the last book listing.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1";
-    public static final int PRIVILEGE_LEVEL = Model.PRIVILEGE_LEVEL_STUDENT;
+        + ": Borrows the book identified by the index number used in the last book listing.\n"
+        + "Parameters: INDEX (must be a positive integer)\n"
+        + "Example: " + COMMAND_WORD + " 1";
+    public static final PrivilegeLevel PRIVILEGE_LEVEL = Model.PRIVILEGE_LEVEL_STUDENT;
 
     private final Index targetIndex;
 
     private Book bookToBorrow;
 
-    public BorrowCommand (Index targetIndex) {this.targetIndex = targetIndex;}
+    public BorrowCommand(Index targetIndex) {
+        this.targetIndex = targetIndex;
+    }
 
     @Override
     public CommandResult executeUndoableCommand() throws CommandException {
@@ -38,7 +44,7 @@ public class BorrowCommand extends UndoableCommand {
         } catch (BookNotFoundException pnfe) {
             throw new CommandException(MESSAGE_FAILURE);
         }
-        return new CommandResult(String.format (MESSAGE_SUCCESS, bookToBorrow));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, bookToBorrow));
     }
 
     @Override
@@ -53,11 +59,15 @@ public class BorrowCommand extends UndoableCommand {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         BorrowCommand that = (BorrowCommand) o;
-        return Objects.equals(targetIndex, that.targetIndex) &&
-                Objects.equals(bookToBorrow, that.bookToBorrow);
+        return Objects.equals(targetIndex, that.targetIndex)
+            && Objects.equals(bookToBorrow, that.bookToBorrow);
     }
 
     @Override
@@ -66,7 +76,7 @@ public class BorrowCommand extends UndoableCommand {
     }
 
     @Override
-    public int getPrivilegeLevel() {
+    public PrivilegeLevel getPrivilegeLevel() {
         return PRIVILEGE_LEVEL;
     }
 }

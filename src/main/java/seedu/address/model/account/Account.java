@@ -35,6 +35,7 @@ public class Account implements Serializable {
 
     /**
      * Returns a sample guest account
+     *
      * @return
      */
     public static final Account createGuestAccount() {
@@ -48,6 +49,7 @@ public class Account implements Serializable {
 
     /**
      * Returns a sample admin account
+     *
      * @return
      */
     public static final Account createDefaultAdminAccount() {
@@ -61,6 +63,7 @@ public class Account implements Serializable {
 
     /**
      * Returns a sample student account
+     *
      * @return
      */
     public static final Account createDefaultStudentAccount() {
@@ -74,6 +77,7 @@ public class Account implements Serializable {
 
     /**
      * Returns the name of the account
+     *
      * @return
      */
     public Name getName() {
@@ -82,6 +86,7 @@ public class Account implements Serializable {
 
     /**
      * Returns the credential
+     *
      * @return
      */
     public Credential getCredential() {
@@ -90,6 +95,7 @@ public class Account implements Serializable {
 
     /**
      * Returns the MatricNumber
+     *
      * @return
      */
     public MatricNumber getMatricNumber() {
@@ -98,6 +104,7 @@ public class Account implements Serializable {
 
     /**
      * Returns the privilegeLevel of this account
+     *
      * @return
      */
     public PrivilegeLevel getPrivilegeLevel() {
@@ -106,6 +113,7 @@ public class Account implements Serializable {
 
     /**
      * Returns a boolean indicating whether a given credential matches with that of this account
+     *
      * @param c
      * @return
      */
@@ -115,6 +123,7 @@ public class Account implements Serializable {
 
     /**
      * Returns true if this account's username is the same as the username provided
+     *
      * @param username
      * @return
      */
@@ -124,6 +133,7 @@ public class Account implements Serializable {
 
     /**
      * Returns true if this account's username is the same as that of the credential provided
+     *
      * @param c
      * @return
      */
@@ -133,6 +143,7 @@ public class Account implements Serializable {
 
     /**
      * Returns true if this account's username is the same as that of the account provided
+     *
      * @param a
      * @return
      */
