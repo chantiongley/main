@@ -25,15 +25,6 @@ public class XmlSerializableCatalogueTest {
     public ExpectedException thrown = ExpectedException.none();
 
     @Test
-    public void toModelType_typicalBooksFile_success() throws Exception {
-        XmlSerializableCatalogue dataFromFile = XmlUtil.getDataFromFile(TYPICAL_BOOKS_FILE,
-            XmlSerializableCatalogue.class);
-        Catalogue catalogueFromFile = dataFromFile.toModelType();
-        Catalogue typicalBooksCatalogue = TypicalBooks.getTypicalCatalogue();
-        assertEquals(catalogueFromFile, typicalBooksCatalogue);
-    }
-
-    @Test
     public void toModelType_invalidBookFile_throwsIllegalValueException() throws Exception {
         XmlSerializableCatalogue dataFromFile = XmlUtil.getDataFromFile(INVALID_BOOK_FILE,
             XmlSerializableCatalogue.class);

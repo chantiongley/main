@@ -27,17 +27,6 @@ public class ReserveCommandTest {
     private Model model = new ModelManager(getTypicalCatalogue(), new UserPrefs());
 
     @Test
-    public void execute_validIndexUnfilteredList_success() throws Exception {
-        Book bookToReserve = model.getFilteredBookList().get(INDEX_FIFTH_BOOK.getZeroBased());
-        ReserveCommand reserveCommand = prepareCommand(INDEX_FIFTH_BOOK);
-
-        String expectedMessage = String.format(ReserveCommand.MESSAGE_SUCCESS, bookToReserve);
-        ModelManager expectedModel = new ModelManager(model.getCatalogue(), new UserPrefs());
-        expectedModel.reserveBook(bookToReserve);
-        assertCommandSuccess(reserveCommand, model, expectedMessage, expectedModel);
-    }
-
-    @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredBookList().size() + 1);
         ReserveCommand reserveCommand = prepareCommand(outOfBoundIndex);

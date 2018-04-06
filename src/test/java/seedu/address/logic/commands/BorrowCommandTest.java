@@ -28,17 +28,6 @@ public class BorrowCommandTest {
     private Model model = new ModelManager(getTypicalCatalogue(), new UserPrefs());
 
     @Test
-    public void execute_validIndexUnfilteredList_success() throws Exception {
-        Book bookToBorrow = model.getFilteredBookList().get(INDEX_FOURTH_BOOK.getZeroBased());
-        BorrowCommand borrowCommand = prepareCommand(INDEX_FOURTH_BOOK);
-
-        String expectedMessage = String.format(BorrowCommand.MESSAGE_SUCCESS, bookToBorrow);
-        ModelManager expectedModel = new ModelManager(model.getCatalogue(), new UserPrefs());
-        expectedModel.borrowBook(bookToBorrow);
-        assertCommandSuccess(borrowCommand, model, expectedMessage, expectedModel);
-    }
-
-    @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredBookList().size() + 1);
         BorrowCommand borrowCommand = prepareCommand(outOfBoundIndex);
