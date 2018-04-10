@@ -1,5 +1,7 @@
-package seedu.address.model.book;
-import java.lang.String;
+package seedu.address.model.book
+
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
 import java.util.Collections;
 import java.util.Objects;
 import java.util.Set;
@@ -7,44 +9,61 @@ import java.util.Set;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+/**
+ * Represents a Book in the catalogue.
+ * Guarantees: details are present and not null, field values are validated, immutable.
+ */
 public class Book {
 
-    private final String title;
-    private final String author;
-    private boolean isBorrowed;
-    private boolean isReserved;
+    private final Title title;
+    private final Author author;
+    private final Isbn isbn;
+    private final Avail avail;
 
     private final UniqueTagList tags;
 
-    public Book(String title, String author, boolean isBorrowed, boolean isReserved, Set<Tag> tags) {
-        requireAllNonNull(title, author, isBorrowed, isReserved, tags);
-        this.title=title;
-        this.author=author;
-        this.isBorrowed=isBorrowed;
-        this.isReserved=isReserved;
+    /**
+     * Every field must be present and not null.
+     */
+    public Book(Title title, Author author, Isbn isbn, Avail avail, Set<Tag> tags) {
+        requireAllNonNull(title, author, isbn, avail, tags);
+        this.title = title;
+        this.author = author;
+        this.isbn = isbn;
+        this.avail = avail;
+        // protect internal tags from changes in the arg list
         this.tags = new UniqueTagList(tags);
     }
 
-    public String getTitle() {
+    public Title getTitle() {
         return title;
     }
 
-    public String getAuthor() {
+    public Author getAuthor() {
         return author;
     }
 
-    public boolean isBorrowed() {
-        return isBorrowed;
+    public Isbn getIsbn() {
+        return isbn;
     }
 
-    public boolean isReserved() { return isReserved; }
+    public Avail getAvail() {
+        return avail;
+    }
+
+
+    /**
+     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
 
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags.toSet());
     }
 
+
+    @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;
@@ -56,26 +75,29 @@ public class Book {
 
         Book otherBook = (Book) other;
         return otherBook.getTitle().equals(this.getTitle())
-                && otherBook.getAuthor().equals(this.getAuthor());
+            && otherBook.getAuthor().equals(this.getAuthor())
+            && otherBook.getIsbn().equals(this.getIsbn())
+            && otherBook.getAvail().equals(this.getAvail());
+
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(title, author, isBorrowed, isReserved, tags);
+        return Objects.hash(title, author, isbn, avail, tags);
     }
 
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getTitle())
-                .append(" Author: ")
-                .append(getAuthor())
-                .append(" Borrowed: ")
-                .append(isBorrowed())
-                .append(" Reserved: ")
-                .append(isReserved())
-                .append(" Tags: ");
+            .append(" Author: ")
+            .append(getAuthor())
+            .append(" Isbn: ")
+            .append(getIsbn())
+            .append(" Avail: ")
+            .append(getAvail())
+            .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();
     }
