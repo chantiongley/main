@@ -12,7 +12,7 @@ public class Author {
 
     public static final String MESSAGE_AUTHOR_CONSTRAINTS =
         "Book author should only contain alphanumeric characters and spaces, and it should not be blank";
-should only contain alphanumeric characters and spaces, and it should not be blank";
+
 
 
     /*
