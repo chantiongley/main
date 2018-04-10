@@ -25,6 +25,7 @@ public class UniqueBookList implements Iterable<Book> {
     private final ObservableList<Book> internalList = FXCollections.observableArrayList();
 
     /**
+
      * Returns true if the list contains an equivalent book as the given argument.
      */
     public boolean contains(Book toCheck) {
@@ -46,6 +47,7 @@ public class UniqueBookList implements Iterable<Book> {
     }
 
     /**
+
      * Replaces the book {@code target} in the list with {@code editedBook}.
      *
      * @throws DuplicateBookException if the replacement is equivalent to another existing book in the list.
@@ -54,7 +56,6 @@ public class UniqueBookList implements Iterable<Book> {
     public void setBook(Book target, Book editedBook)
         throws DuplicateBookException, BookNotFoundException {
         requireNonNull(editedBook);
-
         int index = internalList.indexOf(target);
         if (index == -1) {
             throw new BookNotFoundException();
@@ -111,6 +112,7 @@ public class UniqueBookList implements Iterable<Book> {
         return other == this // short circuit if same object
             || (other instanceof UniqueBookList // instanceof handles nulls
             && this.internalList.equals(((UniqueBookList) other).internalList));
+
     }
 
     @Override

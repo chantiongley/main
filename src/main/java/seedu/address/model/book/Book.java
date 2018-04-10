@@ -1,4 +1,4 @@
-package seedu.address.model.book;
+package seedu.address.model.book
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
@@ -8,6 +8,7 @@ import java.util.Set;
 
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
+
 
 /**
  * Represents a Book in the catalogue.
@@ -56,9 +57,11 @@ public class Book {
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
+
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags.toSet());
     }
+
 
     @Override
     public boolean equals(Object other) {
@@ -75,6 +78,7 @@ public class Book {
             && otherBook.getAuthor().equals(this.getAuthor())
             && otherBook.getIsbn().equals(this.getIsbn())
             && otherBook.getAvail().equals(this.getAvail());
+
     }
 
     @Override
