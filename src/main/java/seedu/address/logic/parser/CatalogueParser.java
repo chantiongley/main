@@ -6,8 +6,10 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import seedu.address.logic.commands.AddAccountCommand;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.ClearAccountCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
@@ -91,6 +93,12 @@ public class CatalogueParser {
 
         case LogoutCommand.COMMAND_WORD:
             return new LogoutCommand();
+
+        case AddAccountCommand.COMMAND_WORD:
+            return new AddAccountCommandParser().parse(arguments);
+
+        case ClearAccountCommand.COMMAND_WORD:
+            return new ClearAccountCommand();
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
