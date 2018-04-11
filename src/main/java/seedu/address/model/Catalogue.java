@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
 import javafx.collections.ObservableList;
 import seedu.address.model.account.Account;
 import seedu.address.model.account.UniqueAccountList;
+import seedu.address.model.account.exceptions.AccountNotFoundException;
 import seedu.address.model.account.exceptions.DuplicateAccountException;
 import seedu.address.model.book.Book;
 import seedu.address.model.book.UniqueBookList;
@@ -61,6 +62,12 @@ public class Catalogue implements ReadOnlyCatalogue {
     public void addAccount (Account p) throws DuplicateAccountException {
         accounts.add(p);
     }
+
+    /**
+     * Deletes an Unique account list using the name of account
+     */
+    public void deleteAccount (Account f) throws AccountNotFoundException{accounts.remove(f);}
+
 
     //// list overwrite operations
 
