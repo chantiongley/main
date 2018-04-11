@@ -22,6 +22,7 @@ import seedu.address.logic.commands.LogoutCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.UndoCommand;
+import seedu.address.logic.commands.exceptions.DeleteAccountCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -95,6 +96,9 @@ public class CatalogueParser {
 
         case AddAccountCommand.COMMAND_WORD:
             return new AddAccountCommandParser().parse(arguments);
+
+        case DeleteAccountCommand.COMMAND_WORD:
+            return new DeleteAccountCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
