@@ -15,6 +15,7 @@ import seedu.address.model.account.Name;
 import seedu.address.model.account.Password;
 import seedu.address.model.account.PrivilegeLevel;
 import seedu.address.model.account.Username;
+import seedu.address.model.account.exceptions.AccountNotFoundException;
 import seedu.address.model.book.Author;
 import seedu.address.model.book.Avail;
 import seedu.address.model.book.Isbn;
@@ -48,6 +49,7 @@ public class ParserUtil {
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
     }
+//@@author chantiongley
 //============================== Account Level Parse Commands ===========================
     /**
      * Parses a {@code String name} into a {@code Name}.
@@ -55,11 +57,11 @@ public class ParserUtil {
      *
      * @throws IllegalValueException if the given {@code name} is invalid.
      */
-    public static Name parseAccountName(String name) throws IllegalValueException {
+    public static Name parseAccountName(String name) throws AccountNotFoundException {
         requireNonNull(name);
         String trimmedName = name.trim();
         if (!Name.isValidName(trimmedName)) {
-            throw new IllegalValueException(Name.MESSAGE_NAME_CONSTRAINTS);
+            throw new AccountNotFoundException();
         }
         return new Name(trimmedName);
     }
@@ -160,7 +162,7 @@ public class ParserUtil {
         }
         return new PrivilegeLevel(input);
     }
-
+//@@author
 //============================== Book Level Parse Commands ==============================
     /**
      * Parses a {@code String title} into a {@code Title}.
