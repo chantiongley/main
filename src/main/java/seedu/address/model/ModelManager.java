@@ -32,7 +32,7 @@ public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final Catalogue catalogue;
-    private final UniqueAccountList accountList;
+    private UniqueAccountList accountList;
     private final FilteredList<Book> filteredBooks;
     private Account currentAccount;
 
@@ -86,6 +86,7 @@ public class ModelManager extends ComponentManager implements Model {
      * @throws DuplicateAccountException
      */
     public void addAccount(Account account) throws DuplicateAccountException {
+        catalogue.addAccount(account);
         accountList.add(account);
         indicateAccountListChanged();
     }
@@ -97,6 +98,7 @@ public class ModelManager extends ComponentManager implements Model {
      * @throws AccountNotFoundException
      */
     public void deleteAccount(Account account) throws AccountNotFoundException {
+        catalogue.deleteAccount(account);
         accountList.remove(account);
         indicateAccountListChanged();
     }
@@ -134,6 +136,11 @@ public class ModelManager extends ComponentManager implements Model {
     public void resetData(ReadOnlyCatalogue newData) {
         catalogue.resetData(newData);
         indicateCatalogueChanged();
+    }
+
+    @Override
+    public void resetAccount(UniqueAccountList newData) {
+        this.accountList = newData;
     }
 
     @Override

@@ -24,7 +24,12 @@ You can login the default account with this command: 'login admin admin'
 
 == Introduction
 
-Catalogue is for those who *prefer to use a desktop app for managing contacts*. More importantly, AB4 is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB4 can get your contact management tasks done faster than traditional GUI apps. Interested? Jump to the <<Quick Start>> to get started. Enjoy!
+Catalogue is for *NUS students* who prefer to use a desktop app for finding, borrowing and returning english books at the Central Library
+Catalogue is for *NUS librarian* who prefer to use a desktop app for managing books, students accounts and loans at the Central Library.
+More importantly, Catalogue is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI).
+If you can type fast, Catalogue can get your contact management tasks done faster than traditional GUI apps.
+This guide will help you and give you an overview of the different features of Catalogue.
+Interested? Jump to the <<Quick Start>> to get started. Enjoy!
 
 == Quick Start
 
@@ -38,8 +43,13 @@ This app will not work with earlier versions of Java 8.
 .  Copy the file to the folder you want to use as the home folder for your Catalogue.
 .  Double-click the file to start the app. The GUI should appear in a few seconds.
 +
-image::Ui.png[width="790"]
+image::UI_final.png[width="790"]
 +
+1 - Command box: type the commands in this section
+2 - Result Display: Show the result of what you typed above
+3 - Book List: List of all the books in the Central Library
+4 – Information Section: when you click on a book, the webpage on goodreads will open and display additional information
+
 .  Type the command in the command box and press kbd:[Enter] to execute it. +
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 .  Some example commands you can try:
@@ -68,8 +78,28 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 Format: `login [username] [password]` +
 Privilege Level: 0(Guest)
 
+Default account:
+Username: admin
+Password: admin
+
+Login with different accounts:
+1 - Add account using adda command (see how to link adda to addAccount)
+2 – Use the username and password that you entered for the above account
+e.g. adda n/Victor Tardieu m/ A1234567N u/e12345 p/secretpassword l/1
+
 [NOTE]
 Different accounts might have different privilege levels. A command can only be executed when the privilege level of the current user is greater or equal to the command's required level. The default admin account can be logged in with 'login admin admin'
+
+=== Logout from Student/Librarian : `Logout`
+
+Format: `logout`
+Privilege Level:
+From 2(Librarian) you are going back to 0(Guest)
+From 1(Student) you are going back to 0(Guest)
+
+[NOTE]
+Remember that when one logs out from your account, some commands (such as add a book for a librarian) won’t be available anymore. To be able to do them again, one will have to login again with his unique credentials.
+
 
 === Viewing help : `help`
 
@@ -139,7 +169,7 @@ Examples:
 
 * `find Animal` +
 Returns `Animal Farm`
-* `find Animal, Breaking, California` +
+* `find Animal Breaking California` +
 Returns any book having titles `Animal`, `Breaking`, or `California`
 
 === Deleting a book : `delete`
