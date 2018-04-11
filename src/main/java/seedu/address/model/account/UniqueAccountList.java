@@ -18,7 +18,7 @@ import seedu.address.model.account.exceptions.DuplicateAccountException;
  * @see Account#equals(Object)
  */
 public class UniqueAccountList implements Serializable, Iterable<Account> {
-    private final ArrayList<Account> internalList = new ArrayList<Account>();
+    public static ArrayList<Account> internalList = new ArrayList<Account>();
 
     /**
      * Returns true if the list contains an equivalent account as the given argument.
@@ -145,6 +145,8 @@ public class UniqueAccountList implements Serializable, Iterable<Account> {
     public int size() {
         return internalList.size();
     }
+
+
 
     @Override
     public Iterator<Account> iterator() {
