@@ -24,7 +24,9 @@ import seedu.address.model.ReadOnlyCatalogue;
 import seedu.address.model.account.Account;
 import seedu.address.model.account.Credential;
 import seedu.address.model.account.PrivilegeLevel;
+import seedu.address.model.account.UniqueAccountList;
 import seedu.address.model.book.Book;
+import seedu.address.model.book.exceptions.BookNotFoundException;
 import seedu.address.model.book.exceptions.DuplicateBookException;
 import seedu.address.testutil.BookBuilder;
 
@@ -63,26 +65,26 @@ public class AddCommandTest {
 
     @Test
     public void equals() {
-        Book alice = new BookBuilder().withTitle("Alice").build();
+        Book animal = new BookBuilder().withTitle("Animal Farm").build();
         Book bob = new BookBuilder().withTitle("Bob").build();
-        AddCommand addAliceCommand = new AddCommand(alice);
+        AddCommand addAnimalCommand = new AddCommand(animal);
         AddCommand addBobCommand = new AddCommand(bob);
 
         // same object -> returns true
-        assertTrue(addAliceCommand.equals(addAliceCommand));
+        assertTrue(addAnimalCommand.equals(addAnimalCommand));
 
         // same values -> returns true
-        AddCommand addAliceCommandCopy = new AddCommand(alice);
-        assertTrue(addAliceCommand.equals(addAliceCommandCopy));
+        AddCommand addAnimalCommandCopy = new AddCommand(animal);
+        assertTrue(addAnimalCommand.equals(addAnimalCommandCopy));
 
         // different types -> returns false
-        assertFalse(addAliceCommand.equals(1));
+        assertFalse(addAnimalCommand.equals(1));
 
         // null -> returns false
-        assertFalse(addAliceCommand.equals(null));
+        assertFalse(addAnimalCommand.equals(null));
 
         // different book -> returns false
-        assertFalse(addAliceCommand.equals(addBobCommand));
+        assertFalse(addAnimalCommand.equals(addBobCommand));
     }
 
     /**
@@ -109,6 +111,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public void resetAccount(UniqueAccountList newData) {
+
+        }
+
+        @Override
         public ReadOnlyCatalogue getCatalogue() {
             fail("This method should not be called.");
             return null;
@@ -125,6 +132,21 @@ public class AddCommandTest {
         }
 
         @Override
+        public void returnBook(Book target, Book returnedBook) throws BookNotFoundException {
+
+        }
+
+        @Override
+        public void borrowBook(Book target, Book borrowedBook) throws BookNotFoundException {
+
+        }
+
+        @Override
+        public void reserveBook(Book target, Book reservedBook) throws BookNotFoundException {
+
+        }
+
+        @Override
         public ObservableList<Book> getFilteredBookList() {
             fail("This method should not be called.");
             return null;
@@ -133,6 +155,12 @@ public class AddCommandTest {
         @Override
         public void updateFilteredBookList(Predicate<Book> predicate) {
             fail("This method should not be called.");
+        }
+
+        @Override
+        public UniqueAccountList getAccountList() {
+            fail("This method should not be called.");
+            return null;
         }
 
         @Override

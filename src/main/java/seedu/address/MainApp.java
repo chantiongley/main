@@ -41,12 +41,13 @@ import seedu.address.ui.Ui;
 import seedu.address.ui.UiManager;
 
 
+
 /**
  * The main entry point to the application.
  */
 public class MainApp extends Application {
 
-    public static final Version VERSION = new Version(0, 6, 0, true);
+    public static final Version VERSION = new Version(1, 5, 0, true);
 
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
 
@@ -101,6 +102,7 @@ public class MainApp extends Application {
         Optional<UniqueAccountList> accountListOptional;
         ReadOnlyCatalogue initialData;
         UniqueAccountList initlaAccountList;
+        //@@author QiuHaohao
         try {
             catalogueOptional = storage.readCatalogue();
             if (!catalogueOptional.isPresent()) {
@@ -142,6 +144,7 @@ public class MainApp extends Application {
             e.printStackTrace();
         }
         return new ModelManager(initialData, initlaAccountList, userPrefs);
+        //@@author
     }
 
     private void initLogging(Config config) {

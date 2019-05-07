@@ -40,9 +40,7 @@ public class CatalogueParserTest {
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
-
     private final CatalogueParser parser = new CatalogueParser();
-
     @Test
     public void parseCommand_add() throws Exception {
         Book book = new BookBuilder().build();

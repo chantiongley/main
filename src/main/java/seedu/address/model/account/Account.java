@@ -1,9 +1,12 @@
+//@@author QiuHaohao
 package seedu.address.model.account;
 
 import static java.util.Objects.requireNonNull;
 
 import java.io.Serializable;
 import java.util.Objects;
+
+
 
 /**
  * Represents an account in the accountBook
@@ -35,6 +38,7 @@ public class Account implements Serializable {
 
     /**
      * Returns a sample guest account
+     *
      * @return
      */
     public static final Account createGuestAccount() {
@@ -48,6 +52,7 @@ public class Account implements Serializable {
 
     /**
      * Returns a sample admin account
+     *
      * @return
      */
     public static final Account createDefaultAdminAccount() {
@@ -61,6 +66,7 @@ public class Account implements Serializable {
 
     /**
      * Returns a sample student account
+     *
      * @return
      */
     public static final Account createDefaultStudentAccount() {
@@ -68,12 +74,13 @@ public class Account implements Serializable {
         Credential credential = new Credential("student", "student");
         MatricNumber matricNumber = new MatricNumber("A0123456X");
         PrivilegeLevel privilegeLevel = new PrivilegeLevel(1);
-        Account admin = new Account(name, credential, matricNumber, privilegeLevel);
-        return admin;
+        Account student = new Account(name, credential, matricNumber, privilegeLevel);
+        return student;
     }
 
     /**
      * Returns the name of the account
+     *
      * @return
      */
     public Name getName() {
@@ -82,6 +89,7 @@ public class Account implements Serializable {
 
     /**
      * Returns the credential
+     *
      * @return
      */
     public Credential getCredential() {
@@ -90,6 +98,7 @@ public class Account implements Serializable {
 
     /**
      * Returns the MatricNumber
+     *
      * @return
      */
     public MatricNumber getMatricNumber() {
@@ -98,6 +107,7 @@ public class Account implements Serializable {
 
     /**
      * Returns the privilegeLevel of this account
+     *
      * @return
      */
     public PrivilegeLevel getPrivilegeLevel() {
@@ -106,11 +116,42 @@ public class Account implements Serializable {
 
     /**
      * Returns a boolean indicating whether a given credential matches with that of this account
+     *
      * @param c
      * @return
      */
     public boolean credentialMatches(Credential c) {
         return c.equals(this.credential);
+    }
+
+    /**
+     * Returns true if this account's username is the same as the username provided
+     *
+     * @param username
+     * @return
+     */
+    public boolean usernameMatches(Username username) {
+        return this.credential.usernameEquals(username);
+    }
+
+    /**
+     * Returns true if this account's username is the same as that of the credential provided
+     *
+     * @param c
+     * @return
+     */
+    public boolean usernameMatches(Credential c) {
+        return usernameMatches(c.getUsername());
+    }
+
+    /**
+     * Returns true if this account's username is the same as that of the account provided
+     *
+     * @param a
+     * @return
+     */
+    public boolean usernameMatches(Account a) {
+        return usernameMatches(a.getCredential());
     }
 
     @Override
@@ -131,5 +172,10 @@ public class Account implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hash(name, credential, matricNumber, privilegeLevel);
+    }
+
+    @Override
+    public String toString() {
+        return this.credential.getUsername().toString();
     }
 }

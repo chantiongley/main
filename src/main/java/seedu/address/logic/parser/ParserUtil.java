@@ -10,6 +10,12 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.model.account.MatricNumber;
+import seedu.address.model.account.Name;
+import seedu.address.model.account.Password;
+import seedu.address.model.account.PrivilegeLevel;
+import seedu.address.model.account.Username;
+import seedu.address.model.account.exceptions.AccountNotFoundException;
 import seedu.address.model.book.Author;
 import seedu.address.model.book.Avail;
 import seedu.address.model.book.Isbn;
@@ -43,6 +49,123 @@ public class ParserUtil {
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
     }
+    //============================== Account Level Parse Commands ===========================
+
+    //@@author chantiongley
+    /**
+     * Parses a {@code String name} into a {@code Name}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws AccountNotFoundException if the given {@code name} is invalid.
+     */
+    public static Name parseAccountName(String name) throws AccountNotFoundException {
+        requireNonNull(name);
+        String trimmedName = name.trim();
+        if (!Name.isValidName(trimmedName)) {
+            throw new AccountNotFoundException(Name.MESSAGE_NAME_CONSTRAINTS);
+        }
+        return new Name(trimmedName);
+    }
+
+    /**
+     * Parses a {@code Optional<String> name} into an {@code Optional<Name>} if {@code name} is present.
+     * See header comment of this class regarding the use of {@code Optional} parameters.
+     */
+    public static Optional<Name> parseAccountName(Optional<String> name) throws AccountNotFoundException {
+        requireNonNull(name);
+        return name.isPresent() ? Optional.of(parseAccountName(name.get())) : Optional.empty();
+    }
+
+    /**
+     * Parses a {@code String matricNumber} into a {@code MatricNumber}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws AccountNotFoundException if the given {@code matricNumber} is invalid.
+     */
+    public static MatricNumber parseAccountMatricNumber(String matricNumber) throws AccountNotFoundException {
+        requireNonNull(matricNumber);
+        String trimmedMatricNumber = matricNumber.trim();
+        if (!MatricNumber.isValidMatricNumber(trimmedMatricNumber)) {
+            throw new AccountNotFoundException(MatricNumber.MESSAGE_MATRIC_NUMBER_CONSTRAINTS);
+        }
+        return new MatricNumber(trimmedMatricNumber);
+    }
+
+    /**
+     * Parses a {@code Optional<String> title} into an {@code Optional<Title>} if {@code title} is present.
+     * See header comment of this class regarding the use of {@code Optional} parameters.
+     */
+    public static Optional<MatricNumber> parseAccountMatricNumber(Optional<String> matricNumber)
+        throws AccountNotFoundException {
+        requireNonNull(matricNumber);
+        return matricNumber.isPresent() ? Optional.of(parseAccountMatricNumber(matricNumber.get())) : Optional.empty();
+    }
+
+    /**
+     * Parses a {@code String username} into a {@code Username}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws AccountNotFoundException if the given {@code username} is invalid.
+     */
+    public static Username parseAccountUsername(String username) throws AccountNotFoundException {
+        requireNonNull(username);
+        String trimmedUsername = username.trim();
+        if (!Username.isValidUsername(trimmedUsername)) {
+            throw new AccountNotFoundException (Username.MESSAGE_USERNAME_CONSTRAINTS);
+        }
+        return new Username(trimmedUsername);
+    }
+
+    /**
+     * Parses a {@code Optional<String> username} into an {@code Optional<Username>} if {@code username} is present.
+     * See header comment of this class regarding the use of {@code Optional} parameters.
+     */
+    public static Optional<Username> parseAccountUsername(Optional<String> username) throws AccountNotFoundException {
+        requireNonNull(username);
+        return username.isPresent() ? Optional.of(parseAccountUsername(username.get())) : Optional.empty();
+    }
+
+    /**
+     * Parses a {@code String password} into a {@code Password}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws AccountNotFoundException if the given {@code password} is invalid.
+     */
+    public static Password parseAccountPassword(String password) throws AccountNotFoundException {
+        requireNonNull(password);
+        String trimmedPassword = password.trim();
+        if (!Password.isValidPassword(trimmedPassword)) {
+            throw new AccountNotFoundException(Password.MESSAGE_PASSWORD_CONSTRAINTS);
+        }
+        return new Password(trimmedPassword);
+    }
+
+    /**
+     * Parses a {@code Optional<String> password} into an {@code Optional<Password>} if {@code password} is present.
+     * See header comment of this class regarding the use of {@code Optional} parameters.
+     */
+    public static Optional<Password> parseAccountPassword(Optional<String> password) throws AccountNotFoundException {
+        requireNonNull(password);
+        return password.isPresent() ? Optional.of(parseAccountPassword(password.get())) : Optional.empty();
+    }
+
+    /**
+     * Parses a {@code String privilegeLevel} into a {@code PrivilegeLevel}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws AccountNotFoundException if the given {@code privilegeLevel} is invalid.
+     */
+    public static PrivilegeLevel parseAccountPrivilegeLevel(String privilegeLevel) throws AccountNotFoundException {
+        requireNonNull(privilegeLevel);
+        int input = Integer.parseInt(privilegeLevel);
+
+        if (!PrivilegeLevel.isValidPrivilegeLevel(input)) {
+            throw new AccountNotFoundException(PrivilegeLevel.MESSAGE_PRIVILEGE_LEVEL_CONSTRAINTS);
+        }
+        return new PrivilegeLevel(input);
+    }
+
+    //============================== Book Level Parse Commands ==============================
 
     /**
      * Parses a {@code String title} into a {@code Title}.

@@ -20,6 +20,7 @@ public class AvailTest {
         Assert.assertThrows(IllegalArgumentException.class, () -> new Avail(invalidAvail));
     }
 
+    //@@author khiayi
     @Test
     public void isValidAvail() {
         // null avail
@@ -33,6 +34,5 @@ public class AvailTest {
         assertTrue(Avail.isValidAvail("Reserved"));  // Reserved
         assertTrue(Avail.isValidAvail("Borrowed"));  // Borrowed
         assertTrue(Avail.isValidAvail("Available"));  // Available
-        assertTrue(Avail.isValidAvail("Borrowed and Reserved")); // Borrowed and Reserved
     }
 }

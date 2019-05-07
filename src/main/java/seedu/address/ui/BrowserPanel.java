@@ -1,5 +1,8 @@
 package seedu.address.ui;
 
+import java.io.IOException;
+import java.net.InetSocketAddress;
+import java.net.Socket;
 import java.net.URL;
 import java.util.logging.Logger;
 
@@ -21,8 +24,10 @@ import seedu.address.model.book.Book;
 public class BrowserPanel extends UiPart<Region> {
 
     public static final String DEFAULT_PAGE = "default.html";
+    public static final String NO_INTERNET_PAGE = "NoInternet.html";
+    public static final String GOOD_READS_URL = "www.goodreads.com";
     public static final String SEARCH_PAGE_URL =
-        "https://se-edu.github.io/addressbook-level4/DummySearchPage.html?name=";
+        "https://www.goodreads.com/search?utf8=%E2%9C%93&query=";
 
     private static final String FXML = "BrowserPanel.fxml";
 
@@ -39,10 +44,20 @@ public class BrowserPanel extends UiPart<Region> {
 
         loadDefaultPage();
         registerAsAnEventHandler(this);
+        browser.getEngine().setUserAgent("Mozilla/5.0 (iPhone; CPU iPhone OS 10_0 like Mac OS X) "
+            + "AppleWebKit/602.1.38 (KHTML, like Gecko) Version/10.0 Mobile/14A5297c Safari/602.1");
     }
 
+    /**
+     * Loads the GoodReads page for a book
+     * @param book
+     */
     private void loadBookPage(Book book) {
-        loadPage(SEARCH_PAGE_URL + book.getTitle().fullTitle);
+        if (pingHost(GOOD_READS_URL, 80 , 3000)) {
+            loadPage(SEARCH_PAGE_URL + book.getIsbn().toString());
+        } else {
+            loadNoInternetPage();
+        }
     }
 
     public void loadPage(String url) {
@@ -58,6 +73,14 @@ public class BrowserPanel extends UiPart<Region> {
     }
 
     /**
+     * Loads a HTML indicating that there is no Internet.
+     */
+    private void loadNoInternetPage() {
+        URL defaultPage = MainApp.class.getResource(FXML_FILE_FOLDER + NO_INTERNET_PAGE);
+        loadPage(defaultPage.toExternalForm());
+    }
+
+    /**
      * Frees resources allocated to the browser.
      */
     public void freeResources() {
@@ -68,5 +91,21 @@ public class BrowserPanel extends UiPart<Region> {
     private void handleBookPanelSelectionChangedEvent(BookPanelSelectionChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         loadBookPage(event.getNewSelection().book);
+    }
+
+    /**
+     * Connects to a host and returns a boolean indicating whether the connection is successful
+     * @param host
+     * @param port
+     * @param timeout
+     * @return
+     */
+    public static boolean pingHost(String host, int port, int timeout) {
+        try (Socket socket = new Socket()) {
+            socket.connect(new InetSocketAddress(host, port), timeout);
+            return true;
+        } catch (IOException e) {
+            return false; // Either timeout or unreachable or failed DNS lookup.
+        }
     }
 }

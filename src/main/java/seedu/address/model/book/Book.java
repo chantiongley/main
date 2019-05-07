@@ -1,3 +1,4 @@
+//@@author khiayi
 package seedu.address.model.book;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
@@ -51,6 +52,15 @@ public class Book {
         return avail;
     }
 
+    /**
+     * Returns true if this book's isbn is the same as the isbn provided
+     *
+     * @param isbn
+     * @return
+     */
+    public boolean isbnMatches(Isbn isbn) {
+        return this.isbn.equals(isbn);
+    }
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}

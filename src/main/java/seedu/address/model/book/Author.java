@@ -1,3 +1,4 @@
+//@@author khiayi
 package seedu.address.model.book;
 
 import static java.util.Objects.requireNonNull;
@@ -13,7 +14,7 @@ public class Author {
         "Book author should only contain alphanumeric characters and spaces, and it should not be blank";
 
     /*
-     * The first character of the address must not be a whitespace,
+     * The first character of the author must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
     public static final String AUTHOR_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
@@ -30,6 +31,7 @@ public class Author {
         checkArgument(isValidAuthor(author), MESSAGE_AUTHOR_CONSTRAINTS);
         this.value = author;
     }
+    //@@author
 
     /**
      * Returns true if a given string is a valid book author.
